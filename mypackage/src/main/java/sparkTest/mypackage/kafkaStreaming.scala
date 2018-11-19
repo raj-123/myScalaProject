@@ -87,9 +87,9 @@ getJson.port, getJson.a1, getJson.a2, getJson.a3, getJson.a4, getJson.nOs, getJs
     val sc = SparkContext.getOrCreate(conf)
     
     val ssc = new StreamingContext(sc, Seconds(10));
-    val topics = Map("axestrack" -> 2)
+    val topics = Map("myTopic" -> 2)
     val kafkaParams = Map[String, String](
-      "zookeeper.connect" -> "107.6.151.182:2185",
+      "zookeeper.connect" -> "localhost:2185",
       "group.id" -> "koll19090890",
       "auto.offset.reset" -> "largest")
     import spark.implicits._
