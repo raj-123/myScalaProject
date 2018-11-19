@@ -1,0 +1,223 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>sparkTest</groupId>
+  <artifactId>mypackage</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <build>
+  
+    <plugins>
+    	<plugin>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>scala-compile-first</id>
+                    <phase>process-resources</phase>
+                    <goals>
+                        <goal>add-source</goal>
+                        <goal>compile</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+        
+        
+        <!-- PLUGIN FOR JAR BUILD -->
+        <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>sparkTest.mypackage.kafkaStreaming</mainClass>
+								</manifest>
+							</archive>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        
+        <!-- PLUGIN FOR JAR BUILD ENDS HERE-->
+      </plugins>
+  </build>
+  
+  
+  
+
+  <name>mypackage</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+  
+  
+    <!--  SPARK CONFIG -->
+		<dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming_2.11</artifactId>
+        <version>2.1.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_2.11</artifactId>
+        <version>2.1.0</version>
+        <exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-sql_2.11</artifactId>
+        <version>2.1.0</version>
+    </dependency>
+
+    <dependency>
+			<groupId>org.apache.spark</groupId>
+			<!-- <artifactId>spark-streaming-kafka_2.11</artifactId> -->
+			<artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+			<version>2.1.1</version>
+			
+			
+		</dependency>
+		
+		<!-- CASSANDRA DEPENDENCY -->
+		<dependency>
+        <groupId>com.datastax.spark</groupId>
+        <artifactId>spark-cassandra-connector_2.11</artifactId>
+        <version>2.0.3</version>
+    </dependency>	
+		
+		       <!-- KAFKA -->
+       <!-- KAFKA DEPENDENCY -->
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>kafka-clients</artifactId>
+			<version>0.10.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>connect-runtime</artifactId>
+			<version>0.10.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.kafka</groupId>
+			<artifactId>connect-api</artifactId>
+			<version>0.10.1.0</version>
+		</dependency>
+		
+		
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		
+		<!-- REDIS CONFIG -->
+		
+		<!-- https://mvnrepository.com/artifact/org.redis/scala-redis -->
+		
+		<dependency>
+    			<groupId>org.redis</groupId>
+    			<artifactId>scala-redis_2.11</artifactId>
+    			<version>0.0.25</version>
+		</dependency>
+		
+		<dependency>
+      <groupId>com.redislabs</groupId>
+      <artifactId>spark-redis</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+		
+		<!--  FOR EMAIL -->
+		<dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.6.2</version>
+        </dependency>
+        
+        <dependency>
+    		<groupId>com.typesafe.play</groupId>
+    		<artifactId>play-mailer_2.11</artifactId>
+    		<version>6.0.1</version>
+      </dependency>
+        <!--
+        <dependency>
+ 			<groupId>com.madhukaraphatak</groupId>
+ 			<artifactId>java-sizeof_2.11</artifactId>
+ 			<version>0.1</version>
+ 		</dependency>
+        -->
+        
+        
+    
+       <!--  JSON DEPENDENCY -->
+       <dependency>
+    		<groupId>net.liftweb</groupId>
+    		<artifactId>lift-json_2.11</artifactId>
+    		<version>3.0-M7</version>
+		</dependency>
+		
+		<!-- HIVE DEPENDENCY -->
+		<dependency>
+        	<groupId>org.apache.spark</groupId>
+        	<artifactId>spark-hive_2.11</artifactId>
+        	<version>2.1.0</version>
+        </dependency>
+        <!-- HIVE DEPENDENCY ENDS HERE -->
+       
+    
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

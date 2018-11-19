@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>sparkTest</groupId>
+  <artifactId>MapReduce</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  
+  
+  <build>
+  
+    <plugins>
+    	
+        
+        
+        <!-- PLUGIN FOR JAR BUILD -->
+        <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifest>
+									<mainClass>myPckg.javaMain</mainClass>
+								</manifest>
+							</archive>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+        
+        <!-- PLUGIN FOR JAR BUILD ENDS HERE-->
+      </plugins>
+  </build>
+  
+  
+  
+  
+
+  <name>MapReduce</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- MapReduce Dependency -->
+    <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-mapreduce-client-core -->
+	<dependency>
+    		<groupId>org.apache.hadoop</groupId>
+    		<artifactId>hadoop-mapreduce-client-core</artifactId>
+    		<version>2.7.7</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-core -->
+<dependency>
+    <groupId>org.apache.hadoop</groupId>
+    <artifactId>hadoop-core</artifactId>
+    <version>0.20.2</version>
+</dependency>
+	
+	
+    
+  </dependencies>
+</project>
